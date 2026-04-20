@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosistemul Pădurilor Tropicale din Indochina</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .slide {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #2a5298;
+            margin: 30px 0 20px;
+            border-bottom: 3px solid #00b4db;
+            padding-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #2a5298;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.4s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            color: #ff6b6b;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.3em;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+        }
+
+        /* Animal Slider Styles */
+        .animal-slider-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+        }
+
+        .animal-slider {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            max-width: 700px;
+            height: 400px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .animal-card {
+            min-width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .animal-card:hover {
+            transform: scale(1.02);
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .animal-card .image-caption {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            border-radius: 0 0 15px 15px;
+            font-weight: 600;
+            color: #2a5298;
+            font-size: 1.1em;
+        }
+
+        .slider-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .slider-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .slider-btn:active {
+            transform: scale(0.95);
+        }
+
+        .slider-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .food-chain-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .food-chain {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-chain h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .food-item {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            border-top: 4px solid #667eea;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .anthropic-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 40px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .anthropic-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e74c3c;
+        }
+
+        .anthropic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .anthropic-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .anthropic-item h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #2a5298;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .relationship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .relationship-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border-top: 5px solid #667eea;
+        }
+
+        .relationship-card.competitive {
+            border-top-color: #e74c3c;
+        }
+
+        .relationship-card.non-competitive {
+            border-top-color: #27ae60;
+        }
+
+        .relationship-card h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .relationship-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .relationship-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .relationship-card li:before {
+            content: "▸ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            .image-grid { grid-template-columns: 1fr; }
+            .animal-slider-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .slider-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+            .animal-slider {
+                max-width: 100%;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">12</span> 🌴
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active" data-slide="1">
+            <h1>🌴 Ecosistemul Pădurilor Tropicale din Indochina</h1>
+            <p class="subtitle">O călătorie prin jungla din Asia de Sud-Est</p>
+            <div style="text-align: center; margin: 50px 0;">
+                <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/padure_ceata.jpg" 
+                     alt="Pădurea Tropicală" 
+                     style="max-width: 100%; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; font-size: 1.2em; color: #666;">
+                <p><strong>Biodiversitate · Lanțuri trofice · Influențe antropice</strong></p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Geographic Location -->
+        <div class="slide" data-slide="2">
+            <h2>🌍 Poziționarea Geografică</h2>
+            <div class="info-box">
+                <h3>📍 Localizare</h3>
+                <p>Peninsula Indochina se află în <strong>Asia de Sud-Est continentală</strong>, fiind una dintre cele mai importante regiuni de păduri tropicale din lume.</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>🗺️ Țări</strong>
+                    <p>Vietnam, Laos, Cambodgia, Thailanda, Myanmar și sudul Chinei</p>
+                </div>
+                <div class="info-item">
+                    <strong>📐 Coordonate</strong>
+                    <p>10°-23° Latitudine Nord<br>92°-109° Longitudine Est</p>
+                </div>
+                <div class="info-item">
+                    <strong>📏 Suprafață</strong>
+                    <p>Aproximativ 2 milioane km² (păduri: ~600,000 km²)</p>
+                </div>
+                <div class="info-item">
+                    <strong>🌊 Vecini</strong>
+                    <p>Marea Chinei de Sud (est), Golful Thailandei (sud), Oceanul Indian (vest)</p>
+                </div>
+                <div class="info-item">
+                    <strong>⛰️ Relief</strong>
+                    <p>Munți, platouri, văi fluviale (Mekong, Irrawaddy, Chao Phraya)</p>
+                </div>
+                <div class="info-item">
+                    <strong>🌡️ Climă</strong>
+                    <p>Tropicală umedă, musonică<br>Temperaturi: 25-27°C mediu anual</p>
+                </div>
+            </div>
+
+            <div class="image-grid">
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/padure_ceata.jpg" alt="Hartă Indochina">
+                    <div class="image-caption">Păduri tropicale în Peninsula Indochina</div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/jungla_interior.jpg" alt="Vegetație">
+                    <div class="image-caption">Vegetație densă specifică regiunii</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Climate & Vegetation -->
+        <div class="slide" data-slide="3">
+            <h2>🌦 Climă & Vegetație</h2>
+            <div class="image-grid">
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/jungla_interior.jpg" alt="Vegetație">
+                    <div class="image-caption">Vegetație densă – interior pădure</div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/padure_lumina.jpg" alt="Lumină">
+                    <div class="image-caption">Lumina filtrată prin canopie</div>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌡️</div>
+                    <h3>Climă</h3>
+                    <p>Caldă și umedă tot anul. Precipitații abundente (1500–3000 mm/an).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Vegetație</h3>
+                    <p>Densă, stratificată: canopie, subarboret, strat ierbos, sol.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🦜</div>
+                    <h3>Biodiversitate</h3>
+                    <p>Extrem de mare – mii de specii de plante, animale și insecte.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Plant Examples -->
+        <div class="slide" data-slide="4">
+            <h2>🌿 Exemple de Plante</h2>
+            <p class="subtitle">Flora bogată a pădurilor tropicale</p>
+            
+            <div class="info-box">
+                <h3>🌳 Stratul Arboric Superior</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Dipterocarpaceae</strong>
+                        <p>Arbori giganți (40-50m), specii dominante în Indochina</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Tectona grandis (Tec)</strong>
+                        <p>Lemn prețios, arbore deciduu înalt</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Bambus</strong>
+                        <p>Peste 100 de specii, creștere rapidă</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🌺 Plante Epifite</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Orhidacee</strong>
+                        <p>Mii de specii de orhidee epifite</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Bromeliacee</strong>
+                        <p>Plante care captează apa în frunze</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Ferigi arborescente</strong>
+                        <p>Ferigi uriașe pe trunchiuri de copaci</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🍃 Liane & Plante Tărătoare</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Liane lemnoase</strong>
+                        <p>Se cațără pe arbori pentru a ajunge la lumină</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Rattan (Rotang)</strong>
+                        <p>Palmier cățărător, folosit în mobilă</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Plante medicinale</strong>
+                        <p>Specii cu proprietăți terapeutice</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-grid">
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/jungla_interior.jpg" alt="Arbori">
+                    <div class="image-caption">Arbori giganți Dipterocarpaceae</div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/fluture.jpg" alt="Epifite">
+                    <div class="image-caption">Orhidee și plante epifite</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Animal Examples -->
+        <div class="slide" data-slide="5">
+            <h2>🦁 Biodiversitatea Pădurilor</h2>
+            <p class="subtitle">Specii emblematice ale Indochinei</p>
+            
+            <div class="animal-slider-container">
+                <button class="slider-btn prev-btn" onclick="moveAnimal(-1)">←</button>
+                
+                <div class="animal-slider" id="animalSlider">
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/tigru.jpg" alt="Tigru">
+                        <div class="image-caption">🐅 Tigrul Indochinez<br><small>Panthera tigris corbetti</small></div>
+                    </div>
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/leopard.jpg" alt="Leopard">
+                        <div class="image-caption">🐆 Leopardul<br><small>Panthera pardus</small></div>
+                    </div>
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/maimuta.jpg" alt="Maimuță">
+                        <div class="image-caption">🐒 Maimuța Macaque<br><small>Macaca fascicularis</small></div>
+                    </div>
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/cerb_sambar.jpg" alt="Cerbul">
+                        <div class="image-caption">🦌 Cerbul Sambar<br><small>Rusa unicolor</small></div>
+                    </div>
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/piton.jpg" alt="Piton">
+                        <div class="image-caption">🐍 Pitonul Reticulat<br><small>Python reticulatus</small></div>
+                    </div>
+                    <div class="animal-card" onclick="openLightbox(this)">
+                        <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/crocodil.jpg" alt="Crocodil">
+                        <div class="image-caption">🐊 Crocodilul Siamez<br><small>Crocodylus siamensis</small></div>
+                    </div>
+                </div>
+                
+                <button class="slider-btn next-btn" onclick="moveAnimal(1)">→</button>
+            </div>
+            
+            <div class="slider-info">
+                <p>🖱️ Folosește butoanele ← → sau tastele săgeată pentru a naviga printre animale · Click pentru mărire</p>
+            </div>
+
+            <div class="info-box">
+                <h3>🦋 Alte Specii Importante</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Păsări</strong>
+                        <p>Peste 1,275 specii: vulturi, ulii, papagali, porumbei</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Amfibieni & Reptile</strong>
+                        <p>540+ specii: broaște, șerpi, șopârle, crocodili</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Insecte</strong>
+                        <p>Mii de specii: fluturi, lăcuste, termite, furnici</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Food Chains -->
+        <div class="slide" data-slide="6">
+            <h2>🍃 Lanțuri Trofice</h2>
+            <p class="subtitle">5 exemple concrete din ecosistem</p>
+            
+            <div class="food-chain-container">
+                <div class="food-chain">
+                    <div>
+                        <span class="food-item">🌿 Frunze</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🦗 Lăcustă</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐸 Broască</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐍 Șarpe</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🦅 Vultur</span>
+                    </div>
+                </div>
+
+                <div class="food-chain">
+                    <div>
+                        <span class="food-item">🍎 Fructe</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐒 Macaque</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐆 Leopard</span>
+                    </div>
+                </div>
+
+                <div class="food-chain">
+                    <div>
+                        <span class="food-item">🌱 Iarbă</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🦌 Cerb Sambar</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐅 Tigru</span>
+                    </div>
+                </div>
+
+                <div class="food-chain">
+                    <div>
+                        <span class="food-item">🌾 Semințe</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐭 Șobolan</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐍 Piton</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐊 Crocodil</span>
+                    </div>
+                </div>
+
+                <div class="food-chain">
+                    <div>
+                        <span class="food-item">🍃 Frunze</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐛 Omidă</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐦 Pasăre</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🐍 Șarpe</span>
+                        <span class="arrow">→</span>
+                        <span class="food-item">🦅 Uliu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Trophic Pyramid -->
+        <div class="slide" data-slide="7">
+            <h2>🔺 Piramida Trofică</h2>
+            <p class="subtitle">Nivelurile de energie în ecosistem</p>
+            <div style="display: flex; flex-direction: column; align-items: center; margin: 30px 0;">
+                <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; margin: 8px 0; border-radius: 10px; text-align: center; width: 30%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                    <strong>🐅 Prădători de vârf</strong><br>
+                    <small>Tigru · Leopard · Vulturi</small>
+                </div>
+                <div style="background: linear-gradient(135deg, #f39c12, #d68910); color: white; padding: 20px; margin: 8px 0; border-radius: 10px; text-align: center; width: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                    <strong>🐍 Consumatori Secundari</strong><br>
+                    <small>Broaște · Păsări · Șerpi</small>
+                </div>
+                <div style="background: linear-gradient(135deg, #27ae60, #1e8449); color: white; padding: 20px; margin: 8px 0; border-radius: 10px; text-align: center; width: 70%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                    <strong>🦗 Consumatori Primari</strong><br>
+                    <small>Insecte · Ierbivore · Rozătoare</small>
+                </div>
+                <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 20px; margin: 8px 0; border-radius: 10px; text-align: center; width: 90%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                    <strong>🌿 Producători</strong><br>
+                    <small>Plante · Arbori · Alge</small>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 8px;">
+                <p style="font-weight: 600; color: #856404;">▲ Energia scade la fiecare nivel trofic (~10% transferată)</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Ecological Relationships -->
+        <div class="slide" data-slide="8">
+            <h2>🔗 Relații Interspecifice</h2>
+            <p class="subtitle">Relații concurente și inconcurente</p>
+            
+            <h3 style="color: #e74c3c; margin: 25px 0 15px;">⚔️ Relații Concurente (Antagoniste)</h3>
+            <div class="relationship-grid">
+                <div class="relationship-card competitive">
+                    <h3>🌞 Competiția pentru Lumină</h3>
+                    <ul>
+                        <li>Arborii înalți vs. arbori tineri</li>
+                        <li>Specii diferite pentru acces la canopie</li>
+                        <li>Liane vs. arbori pentru suport</li>
+                    </ul>
+                </div>
+                <div class="relationship-card competitive">
+                    <h3>🍽️ Competiția pentru Hrană</h3>
+                    <ul>
+                        <li>Tigru vs. Leopard (aceleași pradă)</li>
+                        <li>Ierbivore pentru vegetație</li>
+                        <li>Insecte pentru frunze și nectar</li>
+                    </ul>
+                </div>
+                <div class="relationship-card competitive">
+                    <h3>🏠 Competiția pentru Spațiu</h3>
+                    <ul>
+                        <li>Epifite pentru loc pe ramuri</li>
+                        <li>Păsări pentru cuibărit</li>
+                        <li>Animale pentru teritoriu</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color: #27ae60; margin: 25px 0 15px;">🤝 Relații Inconcurente (Neantagoniste)</h3>
+            <div class="relationship-grid">
+                <div class="relationship-card non-competitive">
+                    <h3>🌺 Mutualism (+/+)</h3>
+                    <ul>
+                        <li>Albine-flori (polenizare)</li>
+                        <li>Furnici-plante (protecție reciprocă)</li>
+                        <li>Păsări-maimuțe (alarmă prădători)</li>
+                    </ul>
+                </div>
+                <div class="relationship-card non-competitive">
+                    <h3>🦜 Comensalism (+/0)</h3>
+                    <ul>
+                        <li>Orhidee pe arbori (fără a dăuna)</li>
+                        <li>Păsări care cuibăresc în arbori</li>
+                        <li>Epifite pe trunchiuri</li>
+                    </ul>
+                </div>
+                <div class="relationship-card non-competitive">
+                    <h3>🐍 Prădare-Parazitism (+/-)</h3>
+                    <ul>
+                        <li>Tigru-cerb (prădare)</li>
+                        <li>Căpușe-mamifere (parazitism)</li>
+                        <li>Piton-rozătoare (prădare)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Ecosystem Importance -->
+        <div class="slide" data-slide="9">
+            <h2>🌍 Importanța Ecosistemului</h2>
+            <p class="subtitle">Rolul vital al pădurilor tropicale</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💨</div>
+                    <h3>Reglare Climatică</h3>
+                    <p>Absorb CO₂ și produc oxigen. Stochează carbon în biomasă și sol, reducând efectul de seră global.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💧</div>
+                    <h3>Ciclul Apei</h3>
+                    <p>Reglarea regimului hidrologic, prevenirea inundațiilor, menținerea umidității atmosferice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Biodiversitate</h3>
+                    <p>Găzduiesc mii de specii, multe endemice. Rezervor genetic pentru viitor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏞️</div>
+                    <h3>Protecția Solului</h3>
+                    <p>Previn eroziunea, mențin fertilitatea solului, protejează împotriva alunecărilor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💊</div>
+                    <h3>Resurse Medicinale</h3>
+                    <p>Plante cu proprietăți terapeutice. Sursă pentru medicamente moderne.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Comunități Locale</h3>
+                    <p>Sursă de hrană, adăpost și venit pentru milioane de oameni.</p>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 30px;">
+                <h3>📊 Valori Economice și Ecologice</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Stocare Carbon</strong>
+                        <p>150-200 tone carbon/hectar</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Productivitate</strong>
+                        <p>Cea mai mare productivitate primară terestră</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Specii</strong>
+                        <p>50% din biodiversitatea globală</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Unique Features -->
+        <div class="slide" data-slide="10">
+            <h2>⭐ Ce face acest ecosistem unic?</h2>
+            <div class="image-grid">
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/padure_ceata.jpg" alt="Stratificare">
+                    <div class="image-caption">Canopia stratificată</div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/fluture.jpg" alt="Insecte">
+                    <div class="image-caption">Insecte & polenizatori</div>
+                </div>
+                <div class="image-card" onclick="openLightbox(this)">
+                    <img src="https://raw.githubusercontent.com/MsDos-v7-1/biology/main/natura.jpg" alt="Ecosisteme">
+                    <div class="image-caption">Ecosisteme interconectate</div>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔢</div>
+                    <h3>Număr mare de specii</h3>
+                    <p>Mii de specii coexistă în același spațiu redus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Lanțuri trofice complexe</h3>
+                    <p>Rețele trofice interconectate cu dependențe mutuale.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Animale arboricole</h3>
+                    <p>Gibboni, macaque, gecko zburător – adaptate la viața în arbori.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Anthropogenic Influence -->
+        <div class="slide" data-slide="11">
+            <h2>⚠️ Influențe Antropice</h2>
+            <div class="anthropic-section">
+                <div class="anthropic-title">⚠️ Influențe Antropice</div>
+                <div class="anthropic-grid">
+                    <div class="anthropic-item">
+                        <h3>🪓 Defrișări</h3>
+                        <p>Distrug habitatul animalelor și reduc biodiversitatea.</p>
+                    </div>
+                    <div class="anthropic-item">
+                        <h3>🔫 Vânătoare / Braconaj</h3>
+                        <p>Scad populațiile (ex: tigrul indochinez, aproape dispărut).</p>
+                    </div>
+                    <div class="anthropic-item">
+                        <h3>🌾 Agricultură</h3>
+                        <p>Plantații de palmier și orez înlocuiesc pădurile primare.</p>
+                    </div>
+                    <div class="anthropic-item">
+                        <h3>☣️ Poluare & Schimbări Climatice</h3>
+                        <p>Afectează solul, apa și echilibrul ecosistemului.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Conclusion -->
+        <div class="slide" data-slide="12">
+            <div class="conclusion-box">
+                <h2>🌍 Concluzie</h2>
+                <p style="font-size: 1.2em; line-height: 1.8; margin: 20px 0;">
+                    Pădurile tropicale din Indochina reprezintă unul dintre cele mai complexe și valoroase ecosisteme de pe Pământ.<br><br>
+                    <strong>Protejarea lor este esențială pentru menținerea biodiversității globale și echilibrului climatic.</strong>
+                </p>
+                <div class="action-cards">
+                    <div class="action-card">
+                        <div class="action-icon">🌿</div>
+                        <h3>Conservare</h3>
+                        <p>Arii protejate și coridoare ecologice pentru specii în pericol.</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">📚</div>
+                        <h3>Educație</h3>
+                        <p>Conștientizarea publicului și politici de mediu eficiente.</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">🤝</div>
+                        <h3>Cooperare</h3>
+                        <p>Colaborare internațională pentru protecția ecosistemelor transfrontaliere.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+                <h1 style="color: white; font-size: 2em; margin-bottom: 10px;">🌴 ECOSISTEMUL PĂDURILOR TROPICALE DIN INDOCHINA</h1>
+                <p style="font-size: 1.2em;">Vă mulțumim pentru atenție!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="changeSlide(-1)">← Înapoi</button>
+        <button class="nav-btn" onclick="changeSlide(1)">Înainte →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+        let currentAnimalIndex = 0;
+        const totalAnimals = 6;
+
+        // Lightbox functions
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            const caption = card.querySelector('.image-caption').innerHTML;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = img.src;
+            lightboxCaption.innerHTML = caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Animal slider navigation
+        function moveAnimal(direction) {
+            const slider = document.getElementById('animalSlider');
+            currentAnimalIndex += direction;
+            
+            if (currentAnimalIndex < 0) currentAnimalIndex = totalAnimals - 1;
+            if (currentAnimalIndex >= totalAnimals) currentAnimalIndex = 0;
+            
+            const cardWidth = slider.offsetWidth;
+            slider.scrollTo({
+                left: cardWidth * currentAnimalIndex,
+                behavior: 'smooth'
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+            if (e.key === 'ArrowRight' && currentSlide === 5) {
+                moveAnimal(1);
+            }
+            if (e.key === 'ArrowLeft' && currentSlide === 5) {
+                moveAnimal(-1);
+            }
+        });
+
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide - 1].classList.remove('active');
+            
+            currentSlide += direction;
+            
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            
+            slides[currentSlide - 1].classList.add('active');
+            updateCounter();
+            
+            // Reset animal index when entering slide 5
+            if (currentSlide === 5) {
+                currentAnimalIndex = 0;
+                const slider = document.getElementById('animalSlider');
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateCounter() {
+            document.getElementById('currentSlide').textContent = currentSlide;
+        }
+    </script>
+</body>
+</html>
